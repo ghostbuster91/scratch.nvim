@@ -21,6 +21,10 @@ function M.initDir(scratch_file_dir)
 	end
 end
 
+function string_starts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
+
 -- Recursively list all files in the specified directory
 function M.listDirectoryRecursive(directory)
 	local files = {}
@@ -28,7 +32,7 @@ function M.listDirectoryRecursive(directory)
 
 	for _, file in ipairs(dir_list) do
 		local path = directory .. slash .. file
-		if vim.fn.isdirectory(path) == 1 and file ~= "." and file ~= ".." then
+		if vim.fn.isdirectory(path) == 1 and file ~= "." and file ~= ".." and not string_starts(file, ".") then
 			local subfiles = M.listDirectoryRecursive(path)
 			for _, subfile in ipairs(subfiles) do
 				files[#files + 1] = subfile
