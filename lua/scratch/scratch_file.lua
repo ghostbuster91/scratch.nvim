@@ -122,7 +122,6 @@ local function getScratchFiles()
     end
     return res
 end
-print(vim.inspect(getScratchFiles()))
 
 function M.scratchPad(mode, startLine, endLine)
     local absPath = vim.fn.expand("%:p")
